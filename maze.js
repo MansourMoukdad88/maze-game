@@ -44,7 +44,8 @@ const shuffle = (arr) => {
 const grid = Array(cells).fill(null).map(()=> Array(cells).fill(false));
 const verticals = Array(cells).fill(null) .map(()=> Array(cells - 1).fill(false));
 const horizontals = Array(cells - 1).fill(null).map(()=> Array(cells).fill(false));
-// console.log(grid);
+console.log(verticals);
+
 
 const startRow = Math.floor(Math.random() * cells);
 const startColumn = Math.floor(Math.random() * cells);
@@ -63,25 +64,29 @@ const stepThroughCell = (row, column) => {
     [row + 1, column, "down"],
     [row, column - 1, "left"]
   ]);
-  console.log(neighbors);
 
   // For each neighbor....
   for(let neighbor of neighbors) {
     const [nextRow, nextColumn, direction] = neighbor;
 
   // See if that neighbor is out of bounds
-    if(nextRow < 0 || nextRow >= cells || nextColumn < 0 || nextColumn >=0 ) {
+    if(nextRow < 0 || nextRow >= cells || nextColumn < 0 || nextColumn >=cells ) {
       continue;
     }
 
-  // If we have visited that neighbor, continue to next neighbor 
+  // If we have visited that neighbor, continue to next neighbor
     if(grid[nextRow][nextColumn]) {
       continue;
     }
-  // Remove a wall from either verticals or horizontals 
+  // Remove a wall from either verticals or horizontals // Here we update the verticals!! see it in console
+    if(direction === 'left') {
+      verticals[row][column - 1] = true;
+    } else if (direction === 'right') {
+      verticals[row][column] = true;
+    }
   }
   // Visit that next cell 
 }
 
 stepThroughCell(1, 1);
-console.log(grid);
+// console.log(grid);

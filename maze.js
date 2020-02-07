@@ -44,7 +44,6 @@ const shuffle = (arr) => {
 const grid = Array(cells).fill(null).map(()=> Array(cells).fill(false));
 const verticals = Array(cells).fill(null) .map(()=> Array(cells - 1).fill(false));
 const horizontals = Array(cells - 1).fill(null).map(()=> Array(cells).fill(false));
-console.log(verticals);
 
 
 const startRow = Math.floor(Math.random() * cells);
@@ -79,14 +78,18 @@ const stepThroughCell = (row, column) => {
       continue;
     }
   // Remove a wall from either verticals or horizontals // Here we update the verticals!! see it in console
+  // Means (Make it true)
     if(direction === 'left') {
       verticals[row][column - 1] = true;
     } else if (direction === 'right') {
       verticals[row][column] = true;
+    } else if (direction === 'up') {
+      horizontals[row - 1][column] = true;
+    } else if (direction === 'down') {
+      horizontals[row][column] = true;
     }
   }
   // Visit that next cell 
 }
 
-stepThroughCell(1, 1);
-// console.log(grid);
+stepThroughCell(startRow, startColumn);

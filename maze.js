@@ -3,7 +3,7 @@ const { Engine, Render, Runner, World, Bodies} = Matter;
 const engine = Engine.create();
 const {world} = engine;
 
-const cells = 3;
+const cells = 5;
 const width = 600;
 const height = 600;
 
@@ -88,6 +88,7 @@ const stepThroughCell = (row, column) => {
     } else if (direction === 'down') {
       horizontals[row][column] = true;
     }
+    stepThroughCell(nextRow, nextColumn)
   }
   // Visit that next cell 
 }

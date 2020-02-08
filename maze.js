@@ -1,8 +1,7 @@
 const { Engine, Render, Runner, World, Bodies, Body, Events} = Matter;
 
-const cellsHorizontal = 6;
-const cellsVertical = 4;
-
+const cellsHorizontal = 20;
+const cellsVertical = 10;
 const width = window.innerWidth;
 const height = window.innerHeight;
 
@@ -19,7 +18,7 @@ const render = Render.create({
   element: document.body,
   engine: engine,
   options: {
-    wireframes:true,
+    wireframes:false,
     width,
     height
   }
@@ -115,7 +114,10 @@ horizontals.forEach((row, rowIndex)=> {
       5,
       {
         label: 'wall',
-        isStatic: true
+        isStatic: true,
+        render: {
+          fillStyle: 'red'
+        }
       }
     );
     World.add(world, wall)
@@ -133,7 +135,10 @@ verticals.forEach((row, rowIndex) => {
       unitLengthY,
       {
         label: 'wall',
-        isStatic: true
+        isStatic: true,
+        render: {
+          fillStyle: 'red'
+        }
       }
     );
     World.add(world, wall)
@@ -148,7 +153,10 @@ const goal = Bodies.rectangle(
   unitLengthY * .7,
   {
     label: 'goal',
-    isStatic: true
+    isStatic: true,
+    render: {
+      fillStyle: 'green'
+    }
   } 
 );
 World.add(world, goal);
